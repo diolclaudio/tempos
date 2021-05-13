@@ -1,0 +1,43 @@
+{% extends 'pays/base.html'%}
+
+{% block content%}
+<div class="content fluid">
+  <div class="offset-1 col-10">
+    <h1 class="titulo">Meteorologia</h1>
+    {% for info in informar%}
+    <h3 class="titulo">{{info.tema}}     {{info.info}}</h3>
+    {%empty%}
+    <p>Não informação</p>
+    {% endfor %}
+
+<br>
+    <br>
+    <br>
+
+    <h2 class="titulo">Como podemos melhorar o site?</h2>
+    <p class="titulo">Adicione o seu comentário:<a href="/comentario/">comentar</a></p>
+
+    <h3 class="titulo">Comentarios</h3>
+
+    {%for com in comentario%}
+    <table class="table">
+      <tr>
+        <td class="ce"><b>{{com.data|date:'M d, Y H:i' }}</b></td>
+      </tr>
+      <tr>
+        <td>{{com}}</td>
+      </tr>
+    </table>
+    {% empty%}
+    <p>Não tem comentarios ainda</p>
+    {%endfor%}
+  </div>
+
+  <footer class="rodape">
+    <p>copyright&copy;<i> Diol Nacuco Claudio.</i>Direitos reservados.</p>
+    <p>Se deseja um site ou blog para sua empresa, intituição ou pessoal.</p>
+    <p>Contacte-nós:<i> 873893996 </i></p>
+  </footer>
+</div>
+
+{% endblock content%}
