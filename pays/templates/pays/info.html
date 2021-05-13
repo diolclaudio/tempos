@@ -5,7 +5,7 @@
   <div class="offset-1 col-10">
     <h1 class="titulo">Meteorologia</h1>
     {% for info in informar%}
-    <h3 class="titulo">{{info.tema}}     {{info.info}}</h3>
+      <h3 class="titulo">{{info.tema}}</h3><h3 class="titulo">{{info.info}}</h3>
     {%empty%}
     <p>Não informação</p>
     {% endfor %}
