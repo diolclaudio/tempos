@@ -2,41 +2,43 @@
 
 {% block content%}
 <div class="content fluid">
-  <div class="offset-1 col-10">
-    <h1 class="titulo">Meteorologia</h1>
-    {% for info in informar%}
-      <h3 class="titulo">{{info.tema}}</h3><h3 class="titulo">{{info.info}}</h3>
-    {%empty%}
-    <p>Não informação</p>
-    {% endfor %}
+<div class="offset-1 col-10">
+  <h2 class="titulo">Tabela de pagamentos</h2>
+  <table class="table" id="tabelaspec">
+    <tr><td class="ce">8</td><td class="cd">1000mt</td></tr>
+    <tr><td class="ce">9</td><td class="cd">1500mt</td></tr>
+    <tr><td class="ce">10</td><td class="cd">1800mt</td></tr>
+    <tr><td class="ce">11</td><td class="cd">2000mt</td></tr>
+    <tr><td class="ce">12</td><td class="cd">2020mt</td></tr>
+  </table>
+  <h2 class="titulo">Mais informações</h2>
 
-<br>
-    <br>
-    <br>
+  <p>Com o avanço tecnologico da escola, brevemente as matriculas serão feitas apartir deste site via online.</p>
+  <p>Não so matriculas serão feitas via online, Mas também a convocação de encarregados para reuniões, A verificação de pautas, As novas turmas.
+  A lista dos professores de cada classe e cada turma os horários, E até os melhores alunos</p>
 
-    <h2 class="titulo">Como podemos melhorar o site?</h2>
-    <p class="titulo">Adicione o seu comentário:<a href="/comentario/">comentar</a></p>
 
-    <h3 class="titulo">Comentarios</h3>
+  <h2 class="titulo">Como podemos melhorar o site?</h2>
+  <p>Adicione o seu comentário:<a href="/comentario/">comentar</a></p>
+  <h3>Comentarios</h3>
 
-    {%for com in comentario%}
-    <table class="table">
-      <tr>
-        <td class="ce"><b>{{com.data|date:'M d, Y H:i' }}</b></td>
-      </tr>
-      <tr>
-        <td>{{com}}</td>
-      </tr>
-    </table>
-    {% empty%}
-    <p>Não tem comentarios ainda</p>
-    {%endfor%}
-  </div>
-
+  {%for com in comentario%}
+  <table class="table">
+    <tr>
+      <td class="ce"><b>{{com.data|date:'M d, Y H:i' }}</b></td>
+    </tr>
+    <tr>
+      <td>{{com}}</td>
+    </tr>
+  </table>
+  {% empty%}
+  <p>Não tem comentarios ainda</p>
+  {%endfor%}
+</div>
   <footer class="rodape">
-    <p>copyright&copy;<i> Diol Nacuco Claudio.</i>Direitos reservados.</p>
-    <p>Se deseja um site ou blog para sua empresa, intituição ou pessoal.</p>
-    <p>Contacte-nós:<i> 873893996 </i></p>
+    <p>copyright&copy;<i> Diol Nacuco Claudio.</i>Direitos reservedos.</p>
+    <p>Se deseja um site ou blog para sua empresa, intituicao ou pessoal.</p>
+    <p>Contacte-nos:<i> 873893996 </i></p>
   </footer>
 </div>
 

@@ -3,9 +3,6 @@
   margin: 0px;
 }
 
-h1{
-  color: blue;
-}
 h2{
  margin-top: 35px;
 }
@@ -42,7 +39,7 @@ nav{
 }
 /*----------------------------------------index.html-------------------------------------------*/
 img{
-  width: 1500px;
+  width: 1200px;
   padding: 0px;
 }
 
@@ -66,12 +63,9 @@ ul.messages{
 ul.messages li{
   list-style: none;
 }
-.info{
-  color: red;
-}
+
 /*---------------------------------------info.html----------------------------------------------*/
 /* tabela */
-
 
 table{
   border: 1px solid #606060;

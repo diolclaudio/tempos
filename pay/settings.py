@@ -26,7 +26,7 @@ SECRET_KEY = 'njmgi=ex+=p1lq^4r0$ue(ea9k-!037ezdz05$a$s7@mtr*n74'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['saogabriel.herokuapp.com', 'localhost', '127.0.0.1', '*']
+ALLOWED_HOSTS = ['diol.herokuapp.com', 'localhost', '127.0.0.1', '*']
 
 
 # App1\lication definition
@@ -127,7 +127,7 @@ STATIC_URL = '/static/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 #Redericionamento de login e logout
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '../../info'
 
 LOGOUT_REDIRECT_URL = '../../accounts/login/'
 
@@ -142,3 +142,4 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'diolclaudio21@gmail.com'
 EMAIL_HOST_PASSWORD = 'diol1234'
+

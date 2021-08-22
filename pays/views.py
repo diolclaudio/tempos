@@ -7,60 +7,81 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMessage
 from django.conf import settings
 from django.template.loader import render_to_string
-from.models import Comentario, Pagar, Informar
-from .forms import ComentarioForm, InformarForm
-from .forms import PagarForm
+
+from.models import Pagar, Comentario
+from .forms import PagarForm, ComentarioForm, InscricoesForm
 
 def index(request):
     return render(request, 'pays/index.html')
 
-#Cria um formulario do aluno para pagar a mensalidade
-@login_required
-def pagamentos(request):
-   return render(request, 'pays/pagamentos.html',)
-
-#Listas dos pagamentos
-def oito(request):
-    return render(request, 'pays/pagamentos/oito.html')
-
-def nove(request):
-    return render(request, 'pays/pagamentos/none.html')
-
-def dez(request):
-    return render(request, 'pays/pagamentos/dez.html')
-
-    #decima primeira
-def primeira(request):
-    return render(request, 'pays/pagamentos/primeira.html')
-
-    #decima segunda
-def segunda(request):
-    return render(request, 'pays/pagamentos/segunda.html')
-
-#Turmas que devem pagar
-def oitoa(request):
-    pagar = Pagar.objects.filter(user=request.user)
-
+#Cria formulario para inscricoes
+def inscricoes(request):
     if request.method == 'POST':
-        form = PagarForm(request.POST)
+
+        form = InscricoesForm(request.POST)
 
         if form.is_valid():
-            pagar = form.save(commit=False)
-            pagar.user = request.user
-            pagar.save()
-            messages.info(request, 'As informacoes do aluno estao salvas. Agora clique no pay para pagar a mensalidade')
+            form.save()
+        return redirect('/info/')
 
-            return redirect('/oitava_a/')
+    else:
+        form = InscricoesForm()
+        return render(request, 'pays/inscricoes.html', {'form': form})
+
+def listas(request):
+    return render(request, 'pays/listas.html', )
+
+
+
+#Cria um formulario do aluno para pagar a mensalidade
+@login_required
+def pay(request,):
+    pay = Pagar.objects.filter(user=request.user)
+
+    # Envia um e-mail automatico a confirmar a transicao
+
+
+    if request.method == 'POST':
+
+        form = PagarForm(request.POST)
+        messages.info(request, 'As informacoes do aluno estao salvas. Agora clique no pay para pagar a mensalidade')
+
+        if form.is_valid():
+
+            pay = form.save(commit=False)
+            pay.user = request.user
+            pay.save()
+
+            template = render_to_string('pays/email.html',
+                                        {'nome': pay.nome, 'classe': pay.classe, 'valor': pay.valor, }, )
+            gmail = EmailMessage(
+                'Recibo de mensalidade',
+                template,
+                settings.EMAIL_HOST_USER,
+                ['luztecno21@gmail.com', pay.email],
+            )
+
+            gmail.fail_silently = False
+            gmail.send()
+
+        return redirect('../pagamentos')
+
     else:
         form = PagarForm()
-        return render(request, 'pays/pagamentos/turmas/oitoa.html', {'form': form, 'pagar':pagar})
+        return render(request, 'pays/pay.html', {'form': form, 'pay':pay})
 
+
+def confirmar(request, id):
+
+
+
+    pay = get_object_or_404(Pagar, pk=id)
+    return render(request, 'pays/confirmar.html', {'pay':pay})
 
 #Da informacoes sobre a escola
 def info(request):
-    informar = Informar.objects.all()
     comentario = Comentario.objects.all().order_by('-data')
-    return render(request, 'pays/info.html', {'comentario': comentario, 'informar':informar})
+    return render(request, 'pays/info.html', {'comentario': comentario})
 
 #Cria um formulario para o usuario comentar sobre o site
 def comentario(request):
@@ -79,46 +100,4 @@ def comentario(request):
 def listas(request):
     return render(request, 'pays/listas.html', )
 
-def hor(request):
-    return render(request, 'pays/hor.html')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#Listas dos alunos
-def oita(request):
-    return render(request, 'pays/oita.html',)
-
-def nona(request):
-    return render(request, 'pays/nona.html')
-
-def decima(request):
-    return render(request, 'pays/decima.html')
-
-def onze(request):
-    return render(request, 'pays/onze.html')
-
-def doze(request):
-    return render(request, 'pays/doze.html')
